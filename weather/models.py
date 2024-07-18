@@ -1,6 +1,14 @@
 from django.db import models
 
-# class WeatherRequest(models.Model):
-#     city = models.CharField(max_length=255, verbose_name='City')
-#     latitude = models.FloatField(verbose_name='Latitude', null=True, blank=True)
-#     longitude = models.FloatField(verbose_name='Longitude', null=True, blank=True)
+
+class City(models.Model):
+    city = models.CharField(max_length=255, verbose_name='City')
+    latitude = models.FloatField(verbose_name='Latitude')
+    longitude = models.FloatField(verbose_name='Longitude')
+
+    def __str__(self):
+        return f'{str(self.city)}(lat={self.latitude}, lon={self.longitude})'
+
+    class Meta:
+        verbose_name = 'City'
+        verbose_name_plural = 'Cites'
