@@ -17,4 +17,28 @@
 
         </form>
     </div>
+    <div class="row m-lg-2">
+    <h3>История запросов</h3>
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Город</th>
+                <th scope="col">Широта</th>
+                <th scope="col">Долгота</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for object in object_list %}
+            <tr>
+                <th scope="row">{{ forloop.counter }}</th>
+                <td><a href="{% url 'weather:detail' object.pk %}">{{ object.city }}</a></td>
+                <td>{{ object.latitude }}</td>
+                <td>{{ object.longitude }}</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
 {% endblock %}

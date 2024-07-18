@@ -6,5 +6,5 @@ from app_config import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('weather/', include('weather.urls'), name='weather'),
+    path('weather/', include('weather.urls', namespace='weather')),
 ]
