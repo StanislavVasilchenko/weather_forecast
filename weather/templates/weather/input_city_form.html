@@ -1,0 +1,17 @@
+{% extends 'weather/base.html' %}
+
+{% block content %}
+<form method="post">
+    {% csrf_token %}
+    <h1 class="h3 mb-3 fw-normal">Введите название города</h1>
+
+    <div class="form-floating">
+        <input type="text" class="form-control" id="floatingInput" placeholder="Город" name="city">
+        <label for="floatingInput">Город</label>
+    </div>
+
+
+    <button class="btn btn-primary w-100 py-2" type="submit">Отправить</button>
+
+</form>
+{% endblock %}
