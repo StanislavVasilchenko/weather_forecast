@@ -12,11 +12,14 @@ def get_weather(request):
         if city_coordinates is None:
             context_data = {'message': f"Город {city} не найден"}
             return render(request, 'weather/weather_result.html', context_data)
-        City.objects.create(city=city,
+
+        City.objects.create(city=city.capitalize(),
                             latitude=city_coordinates['latitude'],
                             longitude=city_coordinates['longitude'])
         context_data = get_weather_with_site(city_coordinates)
+        context_data['city'] = city.capitalize()
         return render(request, 'weather/weather_result.html', context_data)
+
     context_data = {'object_list': City.objects.all().distinct('city')}
     return render(request, 'weather/input_city_form.html', context_data)
 
@@ -31,3 +34,5 @@ class CityDetailView(DetailView):
                        'longitude': self.object.longitude}
         context_data['object'] = get_weather_with_site(coordinates)
         return context_data
+
+

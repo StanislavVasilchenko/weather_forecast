@@ -41,7 +41,6 @@ def get_weather_with_site(city_coordinates: dict) -> dict:
     params.update(city_coordinates)
     response = requests.get(URL_BY_GET_WEATHER, params=params).json()
     context_data = {
-        # 'text_temp': f'Погода в городе {city_coordinates['city']} на ближайшие 2 часа',
         'first_hour': response['hourly']['temperature_2m'][0],
         'second_hour': response['hourly']['temperature_2m'][-1],
         'rain1': response['hourly']['rain'][0],
