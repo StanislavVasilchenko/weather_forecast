@@ -1,0 +1,17 @@
+{% extends 'weather/base.html' %}
+{% load static %}
+
+{% block content %}
+    {% if not first_hour %}
+        <h1>{{ message }}</h1>
+        <a href="{% url 'weather:index' %}" class="btn btn-success">Вернуться к поиску города</a>
+    {% else %}
+        <h1>Погода в городе {{ city }} на ближайшие 2 часа</h1>
+        <h2>Ожидаемая температура : {{ first_hour }} - {{ second_hour }}</h2>
+        {% if rain1 <= 0.2 and rain2 <= 0.2 %}
+            <h2>Осадки: Осадков не ожидается</h2>
+        {% else %}
+            <h2>Осадки: Возможны осадки</h2>
+        {% endif %}
+    {% endif %}
+{% endblock %}

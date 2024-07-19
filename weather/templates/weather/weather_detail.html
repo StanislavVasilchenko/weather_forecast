@@ -1,0 +1,28 @@
+{% extends 'weather/base.html' %}
+
+{% block content %}
+    <h1>Прогноз погоды на ближайшие 2 часа</h1>
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">Город</th>
+            <th scope="col">Температура</th>
+            <th scope="col">Осадки</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>{{ city }}</td>
+            <td>{{ object.first_hour }} - {{ object.second_hour }}</td>
+            {% if object.rain1 <= 0.2 and object.rain2 <= 0.2 %}
+                <td>Осадки не ожидаются</td>
+            {% else %}
+                <td>Возможны осадки</td>
+            {% endif %}
+        </tr>
+        </tbody>
+    </table>
+    <div>
+        <a class="btn btn-outline-warning" href="{% url 'weather:index' %}">На гланую</a>
+    </div>
+{% endblock %}
