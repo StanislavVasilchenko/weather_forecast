@@ -7,4 +7,5 @@ from app_config import settings
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('weather/', include('weather.urls', namespace='weather')),
+    path('user/', include('users.urls', namespace='user')),
 ]
