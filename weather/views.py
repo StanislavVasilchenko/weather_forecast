@@ -1,10 +1,12 @@
-from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import render, redirect
 from django.views.generic import DetailView
 
 from weather.models import City
 from weather.services import get_weather_with_site, get_coordinates
 
 
+@login_required(login_url='user/')
 def get_weather(request):
     if request.method == 'POST':
         city = request.POST.get('city')
@@ -12,15 +14,16 @@ def get_weather(request):
         if city_coordinates is None:
             context_data = {'message': f"Город {city} не найден"}
             return render(request, 'weather/weather_result.html', context_data)
-
+        print(request.user)
         City.objects.create(city=city.capitalize(),
                             latitude=city_coordinates['latitude'],
-                            longitude=city_coordinates['longitude'])
+                            longitude=city_coordinates['longitude'],
+                            user=request.user)
         context_data = get_weather_with_site(city_coordinates)
         context_data['city'] = city.capitalize()
         return render(request, 'weather/weather_result.html', context_data)
 
-    context_data = {'object_list': City.objects.all().distinct('city')}
+    context_data = {'object_list': City.objects.filter(user=request.user).distinct('city')}
     return render(request, 'weather/input_city_form.html', context_data)
 
 
@@ -34,5 +37,3 @@ class CityDetailView(DetailView):
                        'longitude': self.object.longitude}
         context_data['object'] = get_weather_with_site(coordinates)
         return context_data
-
-
