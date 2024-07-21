@@ -16,6 +16,7 @@ web приложение, где пользователь вводит назв�
 ## Технологии
 - [Django](https://www.djangoproject.com/)
 - [Django Rest Framework](https://www.django-rest-framework.org/)- [drf-yasg](https://drf-yasg.readthedocs.io/en/stable/)
+- [Docker](https://www.docker.com/)
 
 
 ## Начало работы
@@ -46,4 +47,10 @@ python manage.py migrate
 Чтобы запустить сервер :
 ```
 python3 manage.py runserver
+```
+
+### Запуск контейнера Docker
+Чтобы запустить контейнер с приложением в директории проекта выполните команду :
+```
+docker-compose up --build
 ```
