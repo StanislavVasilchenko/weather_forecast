@@ -11,6 +11,7 @@
                         {% csrf_token %}
                         {{ form.as_p }}
                         <button type="submit" class="btn btn-success">Вход</button>
+                        <a class="btn btn-outline-success" href="{% url 'user:register' %}">Регистрация</a>
                     </form>
                 </div>
                 <div class="card-footer"></div>
